@@ -1,0 +1,47 @@
+.wsp-editor {
+    input,
+    button,
+    div,
+    a:focus {
+        outline: none;
+    }
+    .wsp-title-input {
+        height: 48px;
+        width: 100%;
+        display: block;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        padding-left: 30px;
+        box-sizing: border-box;
+        color: #ccc;
+        &::-webkit-input-placeholder {
+            color: red;
+        }
+        &::-moz-placeholder {
+            color: red;
+        }
+        &::-ms-input-placeholder {
+            color: red;
+        }
+    }
+    .wsp-tool-bar {
+        width: 100%;
+        display: block;
+        height: 32px;
+        background-color: #f2f2f4;
+        border-left: 1px solid #ccc;;
+        border-right: 1px solid #ccc;;
+        box-sizing: border-box;
+    }
+    .wsp-content-area {
+        width: 100%;
+        display: block;
+        min-height: 300px;
+        border: 1px solid #ccc;
+        border-top: none; 
+        padding: 0 10px;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
+}
