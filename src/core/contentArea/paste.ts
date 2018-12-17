@@ -1,5 +1,8 @@
 import WspEditor from "../instance";
-import { createElement } from "../../util";
+import { 
+    createElement,
+    insertHTML
+ } from "../../util";
 
 export default function pasteEvent(elem: Element, options: any, editor: WspEditor) {
     elem.addEventListener('paste', function(e: ClipboardEvent) {
@@ -11,9 +14,9 @@ export default function pasteEvent(elem: Element, options: any, editor: WspEdito
             return;
         }
         
-        let clipboardData = e.clipboardData,
-            clipboardText = '',
-            imgFile = [ ];
+        let clipboardData: DataTransfer = e.clipboardData,
+            clipboardText: string = '',
+            imgFile: Array < File > = [ ];
         
         //复制时先获取文字
         clipboardText = clipboardData.getData('text/plain');
@@ -24,9 +27,9 @@ export default function pasteEvent(elem: Element, options: any, editor: WspEdito
             //把文字中的换行符替换为<br>
             clipboardText = clipboardText.replace(/\n/gm, '<br>');
 
-            let $p = createElement('p');
-            $p.innerHTML = clipboardText;
-            elem.appendChild($p);
+            // document.execCommand('insertHTML', false, clipboardText);
+            console.log(clipboardText);
+            insertHTML(clipboardText);
 
         } else {
             let items = clipboardData.items;

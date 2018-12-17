@@ -5,17 +5,30 @@ import {
     error
 } from '../../util';
 
+import {
+    getSelection,
+    getSelectionRange,
+    getSelectionNode
+} from '../global-api/selection';
+
+const VERSION = '1.0.0';
 
 class WspEditor {
     
     _init: Function;            //初始化方法
+    _options: any;              //初始化参数
     _upload: Function;          //文件上传方法
     $titleInput: Element;       //标题输入dom节点
-    $toolBar: Element;         
-    $contentArea: Element;
-    isClean: boolean;
-    _options: any;
-    
+    $toolBar: Element;          //工具栏dom节点      
+    $contentArea: Element;      //内容输入框dom节点
+
+    //静态方法
+    static version: string = VERSION;
+
+    //光标操作方法
+    static getSelection: Function = getSelection;
+    static getSelectionRange: Function = getSelectionRange;
+    static getSelectionNode: Function = getSelectionNode;
 
     constructor(options:any) {
         if (!(this instanceof WspEditor )) {

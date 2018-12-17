@@ -1,8 +1,7 @@
 
 import {
     error,
-    createElement,
-    setAttribute
+    insertHTML
 } from '../../util';
 import WspEditor from '../instance';
 
@@ -44,7 +43,7 @@ export default function uploadMixin(WspEditor) {
                     result = JSON.parse(xhr.responseText);
 
                     if (result.errno === 0) {
-                        appendImg(self, result);
+                        insertHTML(`<img src=' ${ result.data[0] } '/>`);
                         uploadOptions.successHooks ? uploadOptions.successHooks(xhr) : '';
                     }
                 }
@@ -62,17 +61,4 @@ function setHeader(headers: any, xhr: XMLHttpRequest) {
     Object.keys(headers).forEach(function(key) {
         xhr.setRequestHeader(key, headers[key]);
     }) ;
-}
-
-function appendImg(wspEditor: WspEditor, result: responseBody) {
-    let editor = wspEditor,
-        $contentArea = wspEditor.$contentArea;
-    
-    let $img = createElement('img');
-
-    setAttribute($img, {
-        src: result.data[0]
-    });
-
-    $contentArea.appendChild($img);
 }

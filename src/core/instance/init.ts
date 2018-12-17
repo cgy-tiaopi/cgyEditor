@@ -22,8 +22,6 @@ export function initMixin(WspEditor) {
             return;
         }
 
-        _editor.isClean = true;
-
         //初始化编辑器
         initEditor(options, _editor);
     }
