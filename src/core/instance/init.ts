@@ -8,6 +8,7 @@ import {
     setAttribute
 } from '../../util';
 
+import addUserOperation from '../toolBar';
 import bindEvent from '../contentArea';
 
 import WspEditor from '.';
@@ -49,6 +50,7 @@ function initEditor(options: any, editor: WspEditor) {
 
     //初始化工具栏
     editor.$toolBar = initToolBar($editor);
+    addUserOperation(options, editor);
 
     //初始化内容输入框
     editor.$contentArea = initContentArea($editor);

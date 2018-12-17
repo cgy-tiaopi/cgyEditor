@@ -1,7 +1,7 @@
 
 import {
     error,
-    insertHTML
+    execCommand
 } from '../../util';
 import WspEditor from '../instance';
 
@@ -43,7 +43,9 @@ export default function uploadMixin(WspEditor) {
                     result = JSON.parse(xhr.responseText);
 
                     if (result.errno === 0) {
-                        insertHTML(`<img src=' ${ result.data[0] } '/>`);
+
+                        //执行插入操作，插入复制的图片
+                        execCommand('insertHTML', `<img src=' ${ result.data[0] } '/>`);
                         uploadOptions.successHooks ? uploadOptions.successHooks(xhr) : '';
                     }
                 }

@@ -17,10 +17,3 @@ export function setAttribute(target: Element, attr: object): void {
         target.setAttribute(key, attr[key]);
     });
 }
-
-export function insertHTML(value: any): void {
-    //判断浏览器是否支持insertHTML编辑指令
-    if (document.queryCommandSupported('insertHTML')) {
-        document.execCommand('insertHTML', false, value);
-    } 
-}

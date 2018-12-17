@@ -1,7 +1,7 @@
 import WspEditor from "../instance";
 import { 
     createElement,
-    insertHTML
+    execCommand
  } from "../../util";
 
 export default function pasteEvent(elem: Element, options: any, editor: WspEditor) {
@@ -27,9 +27,8 @@ export default function pasteEvent(elem: Element, options: any, editor: WspEdito
             //把文字中的换行符替换为<br>
             clipboardText = clipboardText.replace(/\n/gm, '<br>');
 
-            // document.execCommand('insertHTML', false, clipboardText);
-            console.log(clipboardText);
-            insertHTML(clipboardText);
+            //执行插入操作，插入复制的文字
+            execCommand('insertHTML', clipboardText);
 
         } else {
             let items = clipboardData.items;
