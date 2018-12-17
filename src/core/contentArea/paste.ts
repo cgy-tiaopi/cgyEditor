@@ -13,7 +13,7 @@ export default function pasteEvent(elem: Element, options: any, editor: WspEdito
         
         let clipboardData = e.clipboardData,
             clipboardText = '',
-            imgFile: [ File ];
+            imgFile = [ ];
         
         //复制时先获取文字
         clipboardText = clipboardData.getData('text/plain');

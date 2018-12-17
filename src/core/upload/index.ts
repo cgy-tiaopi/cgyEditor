@@ -1,19 +1,60 @@
 
+import {
+    error,
+    createElement,
+    setAttribute
+} from '../../util';
+import WspEditor from '../instance';
+
+interface responseBody {
+    errno: number,
+    data: Array<string>
+}
 
 export default function uploadMixin(WspEditor) {
-    WspEditor.prototype._upload = function(uploadList: [ File ]) {
-        let uploadOptions = this._options.uploadOption;
+    WspEditor.prototype._upload = function(file: File) {
+        let self = this,
+            uploadOptions = this._options.uploadOption || {};
+
+        let formData = new FormData();
+        formData.append(uploadOptions.uploadFileName || file.name, file);
 
         let xhr = new XMLHttpRequest(); 
-         xhr.open('POST', uploadOptions.url);
+        try {
 
-        //设置超时时间
-        xhr.timeout = 30000;
+            if (uploadOptions.url === undefined) {
+                throw 'uploadUrl not exist';
+            }
+            xhr.open('POST', uploadOptions.url);
 
-        //如果有自定义请求头
-        uploadOptions.uploadHeader ? setHeader(uploadOptions.uploadHeader, xhr) : '';
+            //设置超时时间
+            xhr.timeout = 30000;
 
-        
+            //如果有自定义请求头
+            uploadOptions.uploadHeader ? setHeader(uploadOptions.uploadHeader, xhr) : '';
+
+            xhr.onreadystatechange = function() {
+                let result:responseBody = void 0;
+
+                if (xhr.readyState === 4) {
+                    if (xhr.status < 200  && xhr.status >= 300) {
+                        uploadOptions.failHooks ? uploadOptions.failHooks(xhr) : '';
+                    }
+
+                    result = JSON.parse(xhr.responseText);
+
+                    if (result.errno === 0) {
+                        appendImg(self, result);
+                        uploadOptions.successHooks ? uploadOptions.successHooks(xhr) : '';
+                    }
+                }
+            }
+
+            xhr.send(formData);
+
+        } catch(err) {
+            error(err);
+        }
     }
 }
 
@@ -21,4 +62,17 @@ function setHeader(headers: any, xhr: XMLHttpRequest) {
     Object.keys(headers).forEach(function(key) {
         xhr.setRequestHeader(key, headers[key]);
     }) ;
+}
+
+function appendImg(wspEditor: WspEditor, result: responseBody) {
+    let editor = wspEditor,
+        $contentArea = wspEditor.$contentArea;
+    
+    let $img = createElement('img');
+
+    setAttribute($img, {
+        src: result.data[0]
+    });
+
+    $contentArea.appendChild($img);
 }
