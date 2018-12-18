@@ -14,8 +14,16 @@ export function getSelectionRange(): Range {
     return range;
 }
 
+//重置光标选中区域
+export function resetSelectionRange(range: Range): void {
+    let selection = getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+}
+
 //获取光标所处位置的节点
 export function getSelectionNode(): Node {
     let elem = getSelectionRange().commonAncestorContainer;
     return elem;
 }
+
