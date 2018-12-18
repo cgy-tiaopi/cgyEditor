@@ -39,7 +39,6 @@ export default function uploadMixin(WspEditor) {
                     if (xhr.status < 200  && xhr.status >= 300) {
                         uploadOptions.failHooks ? uploadOptions.failHooks(xhr) : '';
                     }
-
                     result = JSON.parse(xhr.responseText);
 
                     if (result.errno === 0) {
