@@ -5,7 +5,7 @@ import '../src/theme-default/index.less';
 new WspEditor({
     id: 'app',
     uploadOption: {
-        url: 'http://file.wspvideo.com/digitop/file/bulkUpload?token=sessionId:cce9a32c-b04d-420a-987d-f7a7307314d4',
+        url: 'http://file.wspvideo.com/digitop/file/bulkUpload?token=sessionId:49fcb40b-53fe-400b-915e-879fc8c4a779',
         uploadFileName: 'file'
     }
 });
