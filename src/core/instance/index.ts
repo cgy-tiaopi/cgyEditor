@@ -8,7 +8,8 @@ import {
 import {
     getSelection,
     getSelectionRange,
-    getSelectionNode
+    getSelectionNode,
+    resetSelectionRange
 } from '../global-api/selection';
 
 const VERSION = '1.0.0';
@@ -30,6 +31,7 @@ class WspEditor {
     static getSelection: Function = getSelection;
     static getSelectionRange: Function = getSelectionRange;
     static getSelectionNode: Function = getSelectionNode;
+    static resetSelectionRange: Function = resetSelectionRange;
 
     constructor(options:any) {
         if (!(this instanceof WspEditor )) {
