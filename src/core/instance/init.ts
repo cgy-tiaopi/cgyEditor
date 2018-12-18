@@ -93,7 +93,7 @@ function initContentArea(parentNode: Element) {
         class: 'wsp-content-area'
     });
 
-    $contentArea.innerHTML = "<p><br></p>";
+    $contentArea.innerHTML = "<div><br></div>";
 
     parentNode.appendChild($contentArea);
 
