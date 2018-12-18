@@ -1,4 +1,7 @@
 
 export function execCommand(name: string, value?: any) {
-    document.execCommand(name, false, value);
+    let s =  document.execCommand(name, false, value);
+    if(!s){
+        console.error(name+'--指令执行失败');
+    }
 }

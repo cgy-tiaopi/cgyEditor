@@ -10,9 +10,7 @@ export default function createTitle(options: any, editor: WspEditor) {
 
     $title.addEventListener('click',function(){
         resetSelectionRange(editor._currentRange);
-        execCommand('bold');
-        // execCommand('formatBlock','H1');
-        // execCommand('heading','H1'); 
+        execCommand('formatBlock','<h1>');
     });
 
     $toolBar.appendChild($title);
