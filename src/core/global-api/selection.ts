@@ -1,6 +1,6 @@
 
 //获取selection对象方法
-export function getSelection():Selection {
+export function getSelection(): Selection {
     if (window.getSelection) {
         return window.getSelection();
     } else if (window.document.getSelection) {

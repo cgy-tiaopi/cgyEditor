@@ -55,6 +55,9 @@ function initEditor(options: any, editor: WspEditor) {
     //初始化内容输入框
     editor.$contentArea = initContentArea($editor);
     bindEvent(options, editor);
+
+    //初始化光标位置
+    initRange(editor);
 }
 
 function initTitleInput(parentNode: Element) {
@@ -90,9 +93,20 @@ function initContentArea(parentNode: Element) {
         class: 'wsp-content-area'
     });
 
-    $contentArea.innerHTML = "<div><br></div>";
+    $contentArea.innerHTML = "<p><br></p>";
 
     parentNode.appendChild($contentArea);
 
     return $contentArea;
 }
+
+export function initRange(editor: WspEditor) {
+    let range = document.createRange();
+    let selection = document.getSelection();
+    
+    range.selectNodeContents(editor.$contentArea);
+    selection.removeAllRanges();
+    selection.addRange(range);
+
+    editor._currentRange = range;
+} 

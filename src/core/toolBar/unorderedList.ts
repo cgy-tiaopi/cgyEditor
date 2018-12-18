@@ -4,7 +4,8 @@
 import WspEditor from '../instance';
 import {
     createElement,
-    execCommand
+    execCommand,
+    clearCommonClass
 } from '../../util';
 
 
@@ -15,14 +16,19 @@ export default function createUnorderedList(options: any, editor: WspEditor) {
     $redo.innerHTML = '无序列表';
 
     $redo.addEventListener('click', function() {
-        //检查当前光标所在地方是否有有序列表
-        if (document.queryCommandState('insertOrderedList')) {
-            return;
-        }
-        console.log(editor._currentRange);
         WspEditor.resetSelectionRange(editor._currentRange);
 
         execCommand('insertUnorderedList');
+
+        //控制现实隐藏样式
+        let parentNode = this.parentNode;
+        clearCommonClass(parentNode);
+
+        if (document.queryCommandState('insertUnorderedList')) {
+            this.className='active';
+        } else {
+            this.className='';
+        }
     });
 
     $toolBar.appendChild($redo);
