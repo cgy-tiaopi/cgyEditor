@@ -94,7 +94,6 @@ function initContentArea(parentNode: Element) {
     });
 
     $contentArea.innerHTML = "<p><br></p>";
-
     parentNode.appendChild($contentArea);
 
     return $contentArea;

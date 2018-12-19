@@ -1,8 +1,14 @@
 import {
     error,
-    execCommand
+    execCommand,
+    createElement,
+    setAttribute
 } from '../../util';
 import WspEditor from '../instance';
+import { 
+    initRange
+} from '../instance/init';
+
 interface WspEditorConstructor {
     new (options: any): WspEditor
 }
@@ -43,23 +49,16 @@ export default function uploadMixin(editorConstructor: WspEditorConstructor) {
                     result = JSON.parse(xhr.responseText);
 
                     if (result.errno === 0) {
+
+                        //重置光标所处位置
                         WspEditor.resetSelectionRange(self._currentRange);
 
-                        //执行插入操作，插入复制的图片
-                        execCommand('insertHTML', 
-                            `<div class="wsp-img-container">
-                                <img src=' ${ result.data[0] } ' style="width: 100%"/>
-                                <input placeholder='图片描述(最多50字)' maxlength="50"/>
-                            </div>
-                            <p>
-                                <br>
-                            </p>`
-                        );
+                        insertImg(result.data[0]);
+                        
                         uploadOptions.successHooks ? uploadOptions.successHooks(xhr) : '';
                     }
                 }
             }
-
             xhr.send(formData);
 
         } catch(err) {
@@ -72,4 +71,43 @@ function setHeader(headers: any, xhr: XMLHttpRequest) {
     Object.keys(headers).forEach(function(key) {
         xhr.setRequestHeader(key, headers[key]);
     }) ;
+}
+
+//插入图片方法
+function insertImg(imgUrl) {
+
+    //执行插入操作，插入上传的图片
+    execCommand('insertHTML', 
+        `<div class="wsp-img-container">
+            <img src=" ${ imgUrl } "/><input class="img-des-input" placeholder="图片描述(最多50字)" maxlength="50"><span class="img-des"></span>
+        </div><p><br/></p>`
+    );
+
+    //获取到当前光标所处的元素
+    let $elem = < HTMLElement >WspEditor.getSelectionNode(),
+        $imgContainer = < HTMLElement >$elem.previousSibling;
+
+    //遍历查找带有wsp-img-container类的元素
+    while($imgContainer) {
+        if ($imgContainer.getAttribute('class') === 'wsp-img-container') {
+            break;
+        }
+        $imgContainer = < HTMLElement >$imgContainer.previousSibling;
+    };
+
+    let $childNodeList = $imgContainer.childNodes,
+        $input: HTMLInputElement = void 0,
+        $imgDes: HTMLSpanElement = void 0;
+
+    Object.keys($childNodeList).forEach(function(key) {
+        let $node: HTMLElement = $childNodeList[key];
+        if ($node.nodeType === 1) {
+            $node.getAttribute('class') === 'img-des-input' ? $input = < HTMLInputElement >$node : '';
+            $node.getAttribute('class') === 'img-des' ? $imgDes = < HTMLSpanElement >$node : '';
+        }
+    });
+
+    $input.addEventListener('input', function() {
+        $imgDes.innerText = $input.value;
+    });
 }

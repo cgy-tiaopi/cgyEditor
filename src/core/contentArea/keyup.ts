@@ -17,10 +17,10 @@ function backUpEvent(editor: WspEditor) {
     let $node: Element = < Element >range.endContainer,
         $contentArea = editor.$contentArea;
 
-    if ($contentArea.innerHTML === '') {
-        $contentArea.innerHTML = '<p><br></p>';
-        initRange(editor);
-    }
+    // if ($contentArea.innerHTML === '') {
+    //     $contentArea.innerHTML = '<p><br></p>';
+    //     initRange(editor);
+    // }
 
     //判断当前光标所处的节点是否为元素节点
     if ($node.nodeType === 1) {
