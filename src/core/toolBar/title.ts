@@ -1,5 +1,5 @@
 import WspEditor from '../instance';
-import { createElement, execCommand } from '../../util';
+import { createElement, execCommand, clearCommonClass } from '../../util';
 
 export default function createTitle(options: any, editor: WspEditor) {
     let $toolBar = editor.$toolBar;
@@ -9,7 +9,25 @@ export default function createTitle(options: any, editor: WspEditor) {
 
     $title.addEventListener('click',function(){
         WspEditor.resetSelectionRange(editor._currentRange);
-        execCommand('formatBlock','<h1>');
+
+        //判断工具栏标题选中状态
+        let parentNode = this.parentNode;
+        clearCommonClass(parentNode);
+        
+        if (this.className === 'title'){
+            //标题工具已经选中
+            this.className = '';
+            WspEditor.getSelectionNode().remove();
+            execCommand('insertHTML', '<p><br></p>');
+        }else{
+            // 标题工具未选中
+            let node = WspEditor.getSelectionNode().parentNode.tagName.toLowerCase();//获取光标所在的节点元素
+            if (node === 'li') {
+                execCommand('insertHTML', '<p><br></p>');
+            }
+            execCommand('formatBlock', '<h1>');
+            this.className = 'title';
+        }
     });
 
     $toolBar.appendChild($title);

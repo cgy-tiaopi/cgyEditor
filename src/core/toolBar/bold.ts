@@ -10,6 +10,12 @@ export default function createBold(options: any, editor: WspEditor) {
     $bold.addEventListener('click', function () {
         WspEditor.resetSelectionRange(editor._currentRange);
         execCommand('bold');
+        console.log('queryCommandState--', document.queryCommandState('bold'));
+        if (document.queryCommandState('bold')) {
+            this.className = 'active';
+        } else {
+            this.className = '';
+        }
     });
 
     $toolBar.appendChild($bold);
