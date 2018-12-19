@@ -9,7 +9,6 @@ export default function createLine(options: any, editor: WspEditor) {
 
     $line.addEventListener('click',function(){
         WspEditor.resetSelectionRange(editor._currentRange);
-        // let node = WspEditor.getSelectionNode().parentNode.tagName.toLowerCase();//获取光标所在的节点元素
         execCommand('insertHorizontalRule');
         execCommand('insertHTML', '<p><br></p>');
     });
