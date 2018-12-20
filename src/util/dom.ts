@@ -9,6 +9,14 @@ export function getElementById(elemId: string): Element {
     return document.getElementById(elemId);
 }
 
+// export function getElementByTag(tagName: string): NodeListOf<Element> {
+//     return document.getElementsByTagName(tagName);
+// }
+
+export function getElementByClass(className: string): HTMLCollectionOf<Element> {
+    return document.getElementsByClassName(className);
+}
+
 export function setAttribute(target: Element, attr: object): void {
     
     if (!target.setAttribute) return;
