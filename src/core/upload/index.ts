@@ -78,8 +78,8 @@ function insertImg(imgUrl) {
 
     //执行插入操作，插入上传的图片
     execCommand('insertHTML', 
-        `<div class="wsp-img-container">
-            <img src=" ${ imgUrl } "/><input class="img-des-input" placeholder="图片描述(最多50字)" maxlength="50"><span class="img-des"></span>
+        `<div class="wsp-img-container" style="positionRelative; width: 100%">
+            <img src=" ${ imgUrl } "/><input class="img-des-input" placeholder="图片描述(最多50字)" maxlength="50"><span class="img-des" style="display: none;"></span>
         </div><p><br/></p>`
     );
 

@@ -26,14 +26,13 @@ function backUpEvent(editor: WspEditor) {
         initRange(editor);
     }
 
-    console.log(range);
-
     //判断当前光标所处的节点是否为元素节点
     if ($node.nodeType === 1) {
         let className = $node.getAttribute('class'),
             $parentNode = $node.parentElement;
 
-        if (className === 'wsp-img-container') {
+        //当前node为图片node，且range的offset为2时，光标处于图片内的图片描述
+        if (className === 'wsp-img-container' && range.startOffset != 2 && range.endOffset != 2) {
             $parentNode.removeChild($node);
             if ($parentNode.childElementCount === 0) {
                 $parentNode.innerHTML = '<p><br></p>';
