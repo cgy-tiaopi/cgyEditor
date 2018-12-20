@@ -10,6 +10,7 @@ export default function createLine(options: any, editor: WspEditor) {
     $line.addEventListener('click',function(){
         WspEditor.resetSelectionRange(editor._currentRange);
         execCommand('insertHorizontalRule');
+        execCommand('insertHTML', '<p><br></p>');
     });
 
     $toolBar.appendChild($line);
