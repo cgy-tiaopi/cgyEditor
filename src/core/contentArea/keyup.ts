@@ -47,28 +47,28 @@ function listenChange(editor: WspEditor) {
     //动态监听有序列表
     if (!document.queryCommandState('insertOrderedList')) {
         let childNodes = editor.$toolBar.childNodes;
-        childNodes.forEach(function (value) {
+        for (let value of Object.keys(childNodes)) {
             let $elem: Element = void 0;
-            if (value.nodeType === 1) {
-                $elem = < Element >value;
+            if (childNodes[value].nodeType === 1) {
+                $elem = < Element >childNodes[value];
             }
             if ($elem.textContent === '有序列表') {
                 $elem.className = '';
             }
-        })
+        }
     }
 
     //动态监听无序列表
     if (!document.queryCommandState('insertUnorderedList')) {
         let childNodes = editor.$toolBar.childNodes;
-        childNodes.forEach(function (value) {
+        for (let value of Object.keys(childNodes)) {
             let $elem: Element = void 0;
-            if (value.nodeType === 1) {
-                $elem = < Element >value;
+            if (childNodes[value].nodeType === 1) {
+                $elem = < Element >childNodes[value];
             }
             if ($elem.textContent === '无序列表') {
                 $elem.className = '';
             }
-        })
+        }
     }
 }
