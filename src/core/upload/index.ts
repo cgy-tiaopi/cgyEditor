@@ -3,8 +3,8 @@ import {
     execCommand,
     createElement,
     setAttribute
-} from '../../util';
-import WspEditor from '../instance';
+} from '../../util/index';
+import WspEditor from '../instance/index';
 import { 
     initRange
 } from '../instance/init';

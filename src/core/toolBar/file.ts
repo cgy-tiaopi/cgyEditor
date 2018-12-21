@@ -1,8 +1,8 @@
-import WspEditor from '../instance';
+import WspEditor from '../instance/index';
 import {
     createElement,
     setAttribute,
-} from '../../util';
+} from '../../util/index';
 
 
 export default function createFileImport(options: any, editor: WspEditor) {

@@ -1,8 +1,8 @@
-import WspEditor from "../instance";
+import WspEditor from "../instance/index";
 import { 
     createElement,
     execCommand
- } from "../../util";
+ } from "../../util/index";
 
 export default function pasteEvent(elem: Element, options: any, editor: WspEditor) {
     elem.addEventListener('paste', function(e: ClipboardEvent) {

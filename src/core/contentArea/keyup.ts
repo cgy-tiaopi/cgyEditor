@@ -1,4 +1,4 @@
-import WspEditor from "../instance";
+import WspEditor from "../instance/index";
 import {
     initRange
 } from '../instance/init';

@@ -6,12 +6,12 @@ import {
     createElement,
     getElementById,
     setAttribute
-} from '../../util';
+} from '../../util/index';
 
-import addUserOperation from '../toolBar';
-import bindEvent from '../contentArea';
+import addUserOperation from '../toolBar/index';
+import bindEvent from '../contentArea/index';
 
-import WspEditor from '.';
+import WspEditor from './index';
 
 export function initMixin(WspEditor) {
     WspEditor.prototype._init = function(options) {

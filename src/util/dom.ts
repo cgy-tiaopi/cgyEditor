@@ -1,5 +1,5 @@
 
-import WspEditor from '../core/instance';
+import WspEditor from '../core/instance/index';
 
 export function createElement(elem: string): Element {
     return document.createElement(elem);

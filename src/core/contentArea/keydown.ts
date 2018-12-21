@@ -1,4 +1,4 @@
-import WspEditor from "../instance";
+import WspEditor from "../instance/index";
 
 export default function keydownEvent(elem: Element, editor: WspEditor) {
     elem.addEventListener('keydown', function(e: any) {

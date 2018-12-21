@@ -1,5 +1,5 @@
-import WspEditor from '../instance';
-import { createElement, execCommand, clearCommonClass } from '../../util';
+import WspEditor from '../instance/index';
+import { createElement, execCommand, clearCommonClass } from '../../util/index';
 
 export default function createTitle(options: any, editor: WspEditor) {
     let $toolBar = editor.$toolBar;

@@ -1,12 +1,12 @@
 /*
 *有序列表
 */
-import WspEditor from '../instance';
+import WspEditor from '../instance/index';
 import {
     createElement,
     execCommand,
     clearCommonClass
-} from '../../util';
+} from '../../util/index';
 
 
 export default function createOrderedList(options: any, editor: WspEditor) {

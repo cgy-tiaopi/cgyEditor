@@ -1,12 +1,12 @@
 /*
 *无序列表
 */
-import WspEditor from '../instance';
+import WspEditor from '../instance/index';
 import {
     createElement,
     execCommand,
     clearCommonClass
-} from '../../util';
+} from '../../util/index';
 
 
 export default function createUnorderedList(options: any, editor: WspEditor) {

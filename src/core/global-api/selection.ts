@@ -3,7 +3,7 @@
 export function getSelection(): Selection {
     if (window.getSelection) {
         return window.getSelection();
-    } else if (window.document.getSelection) {
+    } else {
         return document.getSelection();
     }
 }

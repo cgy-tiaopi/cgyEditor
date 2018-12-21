@@ -1,10 +1,10 @@
 
 import { initMixin } from './init';
-import uploadMixin from '../upload';
+import uploadMixin from '../upload/index';
 import { eventMixin } from './event';
 import {
     error
-} from '../../util';
+} from '../../util/index';
 
 import {
     getSelection,
@@ -12,6 +12,8 @@ import {
     getSelectionNode,
     resetSelectionRange
 } from '../global-api/selection';
+
+// import '../../theme-default/index.less';
 
 const VERSION = '1.0.0';
 

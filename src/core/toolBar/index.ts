@@ -1,4 +1,4 @@
-import WspEditor from '../instance';
+import WspEditor from '../instance/index';
 import createUndo from './undo';
 import createRedo from './redo';
 import createBold from './bold';

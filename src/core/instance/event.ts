@@ -1,7 +1,7 @@
-import WspEditor from ".";
+import WspEditor from "./index";
 import  {
     getElementByClass
-} from '../../util';
+} from '../../util/index';
 
 interface WspEditorConstructor {
     new (options: any): WspEditor

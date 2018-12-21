@@ -1,4 +1,4 @@
-import WspEditor from "../instance";
+import WspEditor from "../instance/index";
 import focusEvent from './focus';
 import blurEvent from './blur';
 import inputEvent from './input';

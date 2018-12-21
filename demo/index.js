@@ -1,4 +1,4 @@
-import WspEditor from '../src/core/instance/index.ts';
+import WspEditor from '../src/core/instance/index';
 
 import '../src/theme-default/index.less';
 
