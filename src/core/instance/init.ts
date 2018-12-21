@@ -104,6 +104,8 @@ export function initRange(editor: WspEditor) {
     let selection = document.getSelection();
     
     range.selectNodeContents(editor.$contentArea);
+    range.setStart(editor.$contentArea.getElementsByTagName('p')[0], 0);
+    range.setEnd(editor.$contentArea.getElementsByTagName('p')[0], 0);
     selection.removeAllRanges();
     selection.addRange(range);
 

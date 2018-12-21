@@ -30,7 +30,7 @@ export default function createTitle(options: any, editor: WspEditor) {
         }else{
             // 标题工具未选中
             let node = WspEditor.getSelectionNode().parentNode.tagName.toLowerCase();//获取光标所在的节点元素
-            if (node === 'li') {
+            if (node === 'li' || node === 'ul' || node === 'ol') {
                 execCommand('insertHTML', '<p><br></p>');
             }
             execCommand('formatBlock', '<h1>');
