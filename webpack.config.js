@@ -15,6 +15,15 @@ module.exports = {
         }, {
             test: /\.less$/,
             use: ["style-loader", "css-loader", 'less-loader']  
+        },{
+            test: /\.(gif|png|jpg|woff|svg|ttf|eot)\??.*$/,
+            loader: {
+                loader: 'url-loader',
+                options: {
+                    limit: 8192,
+                    name: './resource/[name].[ext]',
+                },
+            }
         }]
     },  
     resolve: {

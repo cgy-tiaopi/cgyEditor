@@ -45,7 +45,7 @@ export default function pasteEvent(elem: Element, options: any, editor: WspEdito
             }
 
             for (let file of imgFile) {
-                editor._upload(file);
+                editor._upload(file, options);
             }
         }
     });

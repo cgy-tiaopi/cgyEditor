@@ -5,17 +5,22 @@ import WspEditor from '../instance/index';
 import {
     createElement,
     execCommand,
-    clearCommonClass
+    clearCommonClass,
+    notify
 } from '../../util/index';
 
 
 export default function createUnorderedList(options: any, editor: WspEditor) {
     let $toolBar = editor.$toolBar;
 
-    let $redo: Element = createElement('label');
-    $redo.innerHTML = '无序列表';
+    let $unOrderList: Element = createElement('label');
+    $unOrderList.className = "icon icon-unorderList";
 
-    $redo.addEventListener('click', function() {
+    notify.add('cancelUnOrder', function() {
+        $unOrderList.className = 'icon icon-unorderList'
+    });
+
+    $unOrderList.addEventListener('click', function() {
         WspEditor.resetSelectionRange(editor._currentRange);
 
         execCommand('insertUnorderedList');
@@ -25,11 +30,15 @@ export default function createUnorderedList(options: any, editor: WspEditor) {
         clearCommonClass(parentNode);
 
         if (document.queryCommandState('insertUnorderedList')) {
-            this.className='active';
+            this.className='icon icon-unorderList-active';
+
+            // 取消有序队列的选中状态
+            notify.trigger('cancelOrder');
+            
         } else {
-            this.className='';
+            this.className='icon icon-unorderList';
         }
     });
 
-    $toolBar.appendChild($redo);
+    $toolBar.appendChild($unOrderList);
 }

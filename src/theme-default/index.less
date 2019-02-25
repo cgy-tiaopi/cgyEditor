@@ -1,4 +1,5 @@
 .wsp-editor {
+    background-color: #fff;
     input,
     button,
     div,
@@ -32,10 +33,9 @@
         line-height: 32px;
         background-color: #f2f2f4;
         border-left: 1px solid #ccc;
-        ;
         border-right: 1px solid #ccc;
-        ;
         box-sizing: border-box;
+        position: relative;
         >label {
             margin-right: 15px;
             cursor: pointer;
@@ -49,6 +49,38 @@
                 color: #79b8f5;
             }
         }
+        .href-input-wrap {
+            position: absolute;
+            top: 32px;
+            width: 300px;
+            background-color: #fff;
+            box-shadow: 1px 3px 2px rgba(0, 0, 0, 0.6);
+            padding: 10px 20px;
+            box-sizing: border-box;
+            z-index: 1001;
+        }
+        .href-content-input {
+            padding: 2px 10px;
+            display: block;
+            height: 24px;
+            width: 240px;
+            margin-top: 8px;
+            border: none;
+            border-bottom: 1px solid #f2f2f4;
+            font-size: 14px;
+        }
+        .href-btn {
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 16px;
+        }
+        .href-cancel-btn {
+            margin-left: 180px;
+        }
+        .href-confirm-btn {
+            margin-left: 20px;
+        }
     }
     .wsp-content-area {
         width: 100%;
@@ -56,9 +88,10 @@
         min-height: 300px;
         border: 1px solid #ccc;
         border-top: none;
-        padding: 0 10px 20px 10px;
+        padding: 10px 10px 20px 20px;
         box-sizing: border-box;
         overflow-y: auto;
+        position: relative;
         .wsp-img-container {
             position: relative;
             img {
@@ -82,20 +115,99 @@
                     border: 1px solid #79b8f5;
                 }
             }
-            .img-des {
-                position: absolute;
-                left: 50%;
-                right: 0;
-                top: calc(100% - 70px);
-                background-color: rgba(0, 0, 0, 0.3);
-                width: 375px;
-                height: 30px;
-                line-height: 30px;
-                transform: translate(-50%);
-            }
+            // .img-des {
+            //     position: absolute;
+            //     left: 50%;
+            //     right: 0;
+            //     top: calc(100% - 70px);
+            //     background-color: rgba(0, 0, 0, 0.3);
+            //     width: 375px;
+            //     height: 30px;
+            //     line-height: 30px;
+            //     transform: translate(-50%);
+            // }
         }
     }
     .display-none {
         display: none;
+    }
+    .icon {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-top: -2px;
+    }
+    .icon-bold {
+        background: url(../icon/icon-bold.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-bold-active {
+        background: url(../icon/icon-bold-active.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-unorderList {
+        background: url(../icon/icon-unorderList.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-unorderList-active {
+        background: url(../icon/icon-unorderList-active.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-orderList {
+        background: url(../icon/icon-orderList.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-orderList-active {
+        background: url(../icon/icon-orderList-active.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-title {
+        background: url(../icon/icon-title.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-title-active {
+        background: url(../icon/icon-title-active.png) no-repeat;
+        background-size: 100% 100%;
+    }
+    .icon-undo {
+        background: url(../icon/icon-undo.png) no-repeat;
+        background-size: 100% 100%;
+        &:hover {
+            background: url(../icon/icon-undo-active.png) no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+    .icon-redo {
+        background: url(../icon/icon-redo.png) no-repeat;
+        background-size: 100% 100%;
+        &:hover {
+            background: url(../icon/icon-redo-active.png) no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+    .icon-line {
+        background: url(../icon/icon-line.png) no-repeat;
+        background-size: 100% 100%;
+        &:hover {
+            background: url(../icon/icon-line-active.png) no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+    .icon-insert {
+        background: url(../icon/icon-insert.png) no-repeat;
+        background-size: 100% 100%;
+        &:hover {
+            background: url(../icon/icon-insert-active.png) no-repeat;
+            background-size: 100% 100%;
+        }
+    }
+    .icon-img {
+        background: url(../icon/icon-img.png) no-repeat;
+        background-size: 100% 100%;
+        &:hover {
+            background: url(../icon/icon-img-active.png) no-repeat;
+            background-size: 100% 100%;
+        }
     }
 }

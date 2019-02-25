@@ -6,7 +6,8 @@ import createFileImport from './file';
 import createTitle from './title';
 import createLine from './line';
 import createOrderedList from './orderedList';
-import createUnorderedList from './unorderedList'
+import createUnorderedList from './unorderedList';
+import createHref from './href';
 
 
 export default function addUserOperation(options: any, editor: WspEditor) {
@@ -18,4 +19,5 @@ export default function addUserOperation(options: any, editor: WspEditor) {
     createLine(options,editor);
     createOrderedList(options, editor);
     createUnorderedList(options, editor);
+    createHref(options, editor);
 }

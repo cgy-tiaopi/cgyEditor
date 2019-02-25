@@ -9,7 +9,7 @@ export default function createUndo(options: any, editor: WspEditor) {
     let $toolBar = editor.$toolBar;
 
     let $undo: Element = createElement('label');
-    $undo.innerHTML = '撤销';
+    $undo.className = 'icon icon-undo';
 
     $undo.addEventListener('click', function() {
         execCommand('undo');

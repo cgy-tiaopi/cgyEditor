@@ -14,7 +14,7 @@ import bindEvent from '../contentArea/index';
 import WspEditor from './index';
 
 export function initMixin(WspEditor) {
-    WspEditor.prototype._init = function(options) {
+    WspEditor.prototype._init = function(options: any) {
 
         let _editor: WspEditor = this;
 
@@ -46,7 +46,7 @@ function initEditor(options: any, editor: WspEditor) {
     });
 
     //初始化标题输入框
-    editor.$titleInput = initTitleInput($editor);
+    // editor.$titleInput = initTitleInput($editor);
 
     //初始化工具栏
     editor.$toolBar = initToolBar($editor);

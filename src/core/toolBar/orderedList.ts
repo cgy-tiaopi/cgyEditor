@@ -5,17 +5,24 @@ import WspEditor from '../instance/index';
 import {
     createElement,
     execCommand,
-    clearCommonClass
+    clearCommonClass,
+    notify,
 } from '../../util/index';
 
 
 export default function createOrderedList(options: any, editor: WspEditor) {
     let $toolBar = editor.$toolBar;
 
-    let $redo: Element = createElement('label');
-    $redo.innerHTML = '有序列表';
+    let $orderList: Element = createElement('label');
+    $orderList.className = "icon icon-orderList";
 
-    $redo.addEventListener('click', function() {
+    // 向观察者模式发送取消有序列表事件
+    notify.add('cancelOrder', function() {
+        console.log($orderList);
+        $orderList.className = 'icon icon-orderList';
+    });
+
+    $orderList.addEventListener('click', function() {
 
         WspEditor.resetSelectionRange(editor._currentRange);
 
@@ -25,27 +32,16 @@ export default function createOrderedList(options: any, editor: WspEditor) {
         let parentNode = this.parentNode;
         clearCommonClass(parentNode);
         if (document.queryCommandState('insertOrderedList')) {
-            this.className='active';
+            this.className='icon icon-orderList-active';
+            
+            // 取消无序队列的选中状态
+            notify.trigger('cancelUnOrder');
+
         } else {
-            this.className='';
+            this.className='icon icon-orderList';
 
         }
-
-        // let lists = document.querySelectorAll("ol");
-        // for (let i = 0; i < lists.length; i++) {
-        //     let ele = lists[i]; // ol
-        //     let parentNode = ele.parentNode;
-        //     console.log(parentNode);
-        //     if (parentNode.nodeName === 'P') {
-        //         console.log('in');
-        //         console.log(parentNode);
-        //         console.log(parentNode.previousSibling);
-        //         parentNode.previousSibling.appendChild(ele);
-        //         parentNode.parentNode.removeChild(parentNode);
-        //     }
-        // }
-
     });
 
-    $toolBar.appendChild($redo);
+    $toolBar.appendChild($orderList);
 }

@@ -5,7 +5,8 @@ export default function createTitle(options: any, editor: WspEditor) {
     let $toolBar = editor.$toolBar;
 
     let $title:Element = createElement('label');
-    $title.innerHTML = '标题';
+    $title.className = 'icon icon-title';
+
 
     $title.addEventListener('click',function(){
         WspEditor.resetSelectionRange(editor._currentRange);
@@ -14,9 +15,9 @@ export default function createTitle(options: any, editor: WspEditor) {
         let parentNode = this.parentNode;
         clearCommonClass(parentNode);
         
-        if(this.className === 'title'){
+        if(this.className === 'icon icon-title-active'){
             //标题工具已经选中
-            this.className = '';
+            this.className = 'icon icon-title';
             if (WspEditor.getSelectionNode().tagName){
                 //当标题文本为空时
                 WspEditor.getSelectionNode().remove();
@@ -34,7 +35,7 @@ export default function createTitle(options: any, editor: WspEditor) {
                 execCommand('insertHTML', '<p><br></p>');
             }
             execCommand('formatBlock', '<h1>');
-            this.className = 'title';
+            this.className = 'icon icon-title-active';
         }
     });
 

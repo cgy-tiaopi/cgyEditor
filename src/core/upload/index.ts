@@ -13,18 +13,50 @@ interface WspEditorConstructor {
     new (options: any): WspEditor
 }
 
+interface ListItem {
+    key: string,
+    url: string
+}
+
+interface ResponseModel {
+    list: Array<ListItem>
+}
+
 interface responseBody {
+    code: number,
     errno: number,
-    data: Array<string>
+    data: ResponseModel
 }
 
 export default function uploadMixin(editorConstructor: WspEditorConstructor) {
-    editorConstructor.prototype._upload = function(file: File) {
+    editorConstructor.prototype._upload = function(file: File, options: any) {
+        const fileType = file.type;
+        if (WspEditor.allowUploadType.indexOf(fileType) === -1) {
+            if (options && typeof options.errorCallback === 'function') {
+                options.errorCallback({
+                    code: '-1',
+                    msg: '不支持的文件类型'
+                });
+            }
+            return;
+        }
+
         let self: WspEditor = this;
         let uploadOptions = this._options.uploadOption || {};
 
+        // 创建formData对象，将文件存入formData中
         let formData = new FormData();
         formData.append(uploadOptions.uploadFileName || file.name, file);
+
+        // 判断用户是否自己设置请求body
+        let requestBody = uploadOptions.body;
+        if (requestBody) {
+
+            // 将用户设置的body以key-value的形式放入formData中
+            Object.keys(requestBody).forEach(function(key) {
+                formData.append(key, requestBody[key]);
+            });
+        }
 
         let xhr = new XMLHttpRequest(); 
         try {
@@ -41,19 +73,18 @@ export default function uploadMixin(editorConstructor: WspEditorConstructor) {
 
             xhr.onreadystatechange = function() {
                 let result:responseBody = void 0;
-
                 if (xhr.readyState === 4) {
                     if (xhr.status < 200  && xhr.status >= 300) {
                         uploadOptions.failHooks ? uploadOptions.failHooks(xhr) : '';
                     }
                     result = JSON.parse(xhr.responseText);
+                    if (result.code === 1) {
 
-                    if (result.errno === 0) {
-
-                        //重置光标所处位置
+                        // 重置光标所处位置
                         WspEditor.resetSelectionRange(self._currentRange);
 
-                        insertImg(result.data[0]);
+                        // 插入图片
+                        insertImg(result.data.list[0].url);
                         
                         uploadOptions.successHooks ? uploadOptions.successHooks(xhr) : '';
                     }
@@ -74,13 +105,14 @@ function setHeader(headers: any, xhr: XMLHttpRequest) {
 }
 
 //插入图片方法
-function insertImg(imgUrl) {
-
+function insertImg(imgUrl: string) {
     //执行插入操作，插入上传的图片
     execCommand('insertHTML', 
-        `<div class="wsp-img-container" style="positionRelative; width: 100%">
-            <img src=" ${ imgUrl } "/><input class="img-des-input" placeholder="图片描述(最多50字)" maxlength="50"><span class="img-des" style="display: none;"></span>
-        </div><p><br/></p>`
+        '<div class="wsp-img-container" style="positionRelative; width: 100%">'
+        + '<img style="width: 100%" src=" ' + imgUrl + ' "/>'
+        + '<input class="img-des-input" placeholder="图片描述(最多50字)" maxlength="50">'
+        + '<span class="img-des" style="display: none; bottom: 5px; left: 0; width: 100%; background-color: rgba(0, 0, 0, 0.3); color: #fff; text-align: center; font-size: 20px; padding: 4px 0px; box-sizing: border-box;">'
+        + '</span></div><p><br/></p>'
     );
 
     //获取到当前光标所处的元素

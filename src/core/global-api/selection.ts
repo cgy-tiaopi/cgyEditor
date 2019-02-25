@@ -14,7 +14,7 @@ export function getSelectionRange(): Range {
     return range;
 }
 
-//重置光标选中区域
+//重置光标选中区域到上一次失去焦点的位置
 export function resetSelectionRange(range: Range): void {
     let selection = getSelection();
     selection.removeAllRanges();

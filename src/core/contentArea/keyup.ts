@@ -6,10 +6,9 @@ import {
 export default function keyupEvent(elem: Element, editor: WspEditor) {
     elem.addEventListener('keyup', function(e: KeyboardEvent) {
 
-        //如果按下的是撤回键，
-        e.keyCode === 8 ? backUpEvent(editor) : '';
-
+        //按下撤回键
         if (e.keyCode === 8) {
+            backUpEvent(editor)
             listenChange(editor);
         }
     }); 
@@ -32,13 +31,20 @@ function backUpEvent(editor: WspEditor) {
             $parentNode = $node.parentElement;
 
         //当前node为图片node，且range的offset为2时，光标处于图片内的图片描述
-        if (className === 'wsp-img-container' && range.startOffset != 2 && range.endOffset != 2) {
+        if (className === 'wsp-img-container' && (range.startOffset == 2 && range.endOffset == 2)) {
+            console.log($node);
             $parentNode.removeChild($node);
             if ($parentNode.childElementCount === 0) {
                 $parentNode.innerHTML = '<p><br></p>';
                 initRange(editor);
             }
-        }
+        } else if (className === 'wsp-img-container' && (range.startOffset == 0 && range.endOffset == 0)) {
+            $parentNode.removeChild($node);
+            if ($parentNode.childElementCount === 0) {
+                $parentNode.innerHTML = '<p><br></p>';
+                initRange(editor);
+            }
+        }   
     }
 }
 
